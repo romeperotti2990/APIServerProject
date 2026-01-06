@@ -82,30 +82,52 @@
 </head>
 <body>
     <div class="login-container">
-        <h1>Login</h1>
+        <h1>API Tester - Login</h1>
         <form id="loginForm">
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <button type="submit">Login</button>
+            <button type="submit">Get Token</button>
         </form>
+        <div id="tokenDisplay" style="margin-top: 20px; display: none;">
+            <h3>Token:</h3>
+            <textarea id="token" readonly style="width: 100%; height: 60px;"></textarea>
+        </div>
         <div class="signup-link">
-            Don't have an account? <a href="/signup">Sign up</a>
+            Test users: john.doe / password123
         </div>
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const email = document.getElementById('email').value;
+            const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            console.log('Login attempt:', { email, password });
-            // Add your login logic here
+
+            try {
+                const response = await fetch('/getToken', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    localStorage.setItem('token', data.token);
+                    window.location.href = '/cards.html';
+                } else {
+                    alert('Login failed: ' + (data.error || 'Unknown error'));
+                }
+            } catch (error) {
+                alert('Network error: ' + error.message);
+            }
         });
     </script>
 </body>

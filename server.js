@@ -9,6 +9,7 @@ const SECRET_KEY = process.env.SECRET_KEY;
 
 
 app.use(express.json());
+app.use(express.static('public'));
 
 // Load users from JSON file
 const loadUsers = () => {
