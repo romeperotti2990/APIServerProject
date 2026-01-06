@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "rock",
+    "type": "rock",
+    "rarity": "common",
+    "set": "minerals"
+  },
+  {
+    "id": 2,
+    "name": "sandstone",
+    "type": "rock",
+    "rarity": "common",
+    "set": "minerals"
+  },
+  {
+    "id": 3,
+    "name": "granite",
+    "type": "rock",
+    "rarity": "common",
+    "set": "minerals"
+  },
+  {
+    "id": 4,
+    "name": "sand",
+    "type": "rock",
+    "rarity": "uncommon",
+    "set": "minerals"
+  }
+]
